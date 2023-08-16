@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% block title %}Index{% endblock%}
+{% block content %}
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Newest Books</h2>
+
+    <div class="grid grid-cols-4 gap-6">
+      
+       
+            {% for d in books %}
+                <div style="height:500px;width:250px;">
+                    <a href="{% url 'item:detail' pk=d.id %}">
+                        <div >
+                            <img src="{{d.Image.url}}" style="height:400px;width:250px;" class="rounded-xl"> 
+                        </div>
+
+                        <div class="p-6 bg-white rounded-b-xl">
+                            <h2 class="text-2xl">{{ d.Book_Name }}</h2>
+                            <p class="text-gray-500">Price: {{ d.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        
+    </div>
+
+</div>
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Categories</h2>
+
+        <div class="grid grid-cols-3 gap-3">
+        {% for i in categories %}
+                <div>
+                    <a href="#">
+                        <div class="p-6 bg-white rounded-b-xl">
+                            <h2 class="text-2xl">{{i.Name}}</h2>
+                            <p class="text-gray-500">{{ i.books.count }} Available</p>
+                            
+                        </div>
+                    </a>
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
